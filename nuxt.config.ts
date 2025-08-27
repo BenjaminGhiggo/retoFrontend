@@ -7,9 +7,9 @@ export default defineNuxtConfig({
 
   // Configurar Google Fonts
   fonts: {
-    google: {
-      families: ['Rubik:400,500,600,700']
-    }
+    families: [
+      { name: 'Rubik', provider: 'google', weights: [400, 500, 600, 700] }
+    ]
   },
 
   //configuramos plugins
