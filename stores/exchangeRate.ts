@@ -1,29 +1,39 @@
 import { defineStore } from 'pinia';
-import type { ExchangeRate } from '~/src/domain/entities/ExchangeRate';
-import { FirebaseExchangeRateRepository } from '~/src/infrastructure/adapters/FirebaseExchangeRateRepository';
+import type { ExchangeRate } from '../src/domain/entities/ExchangeRate';
+import { FirebaseExchangeRateRepository } from '../src/infrastructure/adapters/FirebaseExchangeRateRepository';
 
 export const useExchangeRateStore = defineStore('exchangeRate', () => {
-  // Estado reactivo
-  const purchasePrice = ref<number>(0);
-  const salePrice = ref<number>(0);
+  // Estado reactivo con valores por defecto
+  const purchasePrice = ref<number>(3.924);
+  const salePrice = ref<number>(3.945);
   const lastUpdated = ref<Date>(new Date());
-  const isLoading = ref<boolean>(true);
+  const isLoading = ref<boolean>(false);
   const error = ref<string | null>(null);
 
-  // Repository (inyección de dependencia)
-  const repository = new FirebaseExchangeRateRepository();
+  // Repository lazy - solo en cliente
+  let repository: FirebaseExchangeRateRepository | null = null;
+
+  const getRepository = () => {
+    if (!repository && process.client) {
+      repository = new FirebaseExchangeRateRepository();
+    }
+    return repository;
+  };
 
   // Acciones
   const fetchRates = async () => {
+    const repo = getRepository();
+    if (!repo) return; // No hacer nada en servidor
+    
     try {
       isLoading.value = true;
       error.value = null;
 
-      const rates = await repository.getExchangeRates();
+      const rates = await repo.getExchangeRates();
 
       purchasePrice.value = rates.purchasePrice;
       salePrice.value = rates.salePrice;
-      lastUpdated.value = rates.timestamp;
+      lastUpdated.value = new Date(rates.timestamp);
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Error fetching rates';
       console.error('Error fetching exchange rates:', err);
@@ -36,11 +46,14 @@ export const useExchangeRateStore = defineStore('exchangeRate', () => {
   let unsubscribe: (() => void) | null = null;
 
   const subscribeToRates = () => {
+    const repo = getRepository();
+    if (!repo) return; // No hacer nada en servidor
+    
     try {
-      unsubscribe = repository.subscribeToRates((rates: ExchangeRate) => {
+      unsubscribe = repo.subscribeToRates((rates: ExchangeRate) => {
         purchasePrice.value = rates.purchasePrice;
         salePrice.value = rates.salePrice;
-        lastUpdated.value = rates.timestamp;
+        lastUpdated.value = new Date(rates.timestamp);
         isLoading.value = false;
       });
     } catch (err) {

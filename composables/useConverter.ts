@@ -1,5 +1,5 @@
-import { ConvertCurrencyUseCase } from '~/src/application/usecases/ConvertCurrency';
-import { FirebaseExchangeRateRepository } from '~/src/infrastructure/adapters/FirebaseExchangeRateRepository';
+import { ConvertCurrencyUseCase } from '../src/application/usecases/ConvertCurrency';
+import { FirebaseExchangeRateRepository } from '../src/infrastructure/adapters/FirebaseExchangeRateRepository';
 
 export const useConverter = () => {
   const repository = new FirebaseExchangeRateRepository();

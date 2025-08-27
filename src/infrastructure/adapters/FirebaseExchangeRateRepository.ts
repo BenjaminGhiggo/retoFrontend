@@ -9,7 +9,7 @@ export class FirebaseExchangeRateRepository implements IExchangeRateRepository {
 
   constructor() {
     // Acceder al Firebase desde el plugin
-    const { $firebase } = useNuxtApp();
+    const { $firebase } = useNuxtApp() as any;
     this.db = $firebase.db;
     this.collectionName = $firebase.collections.RATES;
     this.documentId = $firebase.documents.EXCHANGE_RATES;
@@ -25,7 +25,7 @@ export class FirebaseExchangeRateRepository implements IExchangeRateRepository {
         return {
           purchasePrice: data.purchase_price,
           salePrice: data.sale_price,
-          timestamp: new Date(),
+          timestamp: new Date().toISOString(),
         };
       } else {
         throw new Error('No exchange rate data found');
@@ -45,7 +45,7 @@ export class FirebaseExchangeRateRepository implements IExchangeRateRepository {
         const rates: ExchangeRate = {
           purchasePrice: data.purchase_price,
           salePrice: data.sale_price,
-          timestamp: new Date(),
+          timestamp: new Date().toISOString(),
         };
         callback(rates);
       }

@@ -10,11 +10,11 @@
         <div class="rates">
           <div class="rate-item active">
             <span class="label">Dólar compra</span>
-            <span class="value">{{ exchangeStore.purchasePrice.toFixed(4) }}</span>
+            <span class="value">{{ (purchasePrice || 3.924).toFixed(4) }}</span>
           </div>
           <div class="rate-item">
             <span class="label">Dólar venta</span>
-            <span class="value">{{ exchangeStore.salePrice.toFixed(4) }}</span>
+            <span class="value">{{ (salePrice || 3.945).toFixed(4) }}</span>
           </div>
         </div>
 
@@ -51,14 +51,28 @@
 </template>
 
 <script setup>
+// Import del store
+import { useExchangeRateStore } from '../stores/exchangeRate';
+
 const exchangeStore = useExchangeRateStore();
 
-// Inicializar suscripción a Firebase
-onMounted(() => {
-  exchangeStore.subscribeToRates();
+// Computados con valores por defecto para SSR
+const purchasePrice = computed(() => {
+  return exchangeStore.purchasePrice || 3.924;
 });
 
-onUnmounted(() => {
-  exchangeStore.unsubscribeFromRates();
+const salePrice = computed(() => {
+  return exchangeStore.salePrice || 3.945;
 });
+
+// Solo ejecutar en cliente
+if (process.client) {
+  onMounted(() => {
+    exchangeStore.subscribeToRates();
+  });
+
+  onUnmounted(() => {
+    exchangeStore.unsubscribeFromRates();
+  });
+}
 </script>
