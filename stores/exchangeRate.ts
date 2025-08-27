@@ -1,69 +1,69 @@
 import { defineStore } from 'pinia';
 import type { ExchangeRate } from '~/src/domain/entities/ExchangeRate';
-import { FirebaseExchangeRateRepository } from
-'~/src/infrastructure/adapters/FirebaseExchangeRateRepository';
+import { FirebaseExchangeRateRepository } from '~/src/infrastructure/adapters/FirebaseExchangeRateRepository';
 
 export const useExchangeRateStore = defineStore('exchangeRate', () => {
-// Estado reactivo
-const purchasePrice = ref<number>(0);
-const salePrice = ref<number>(0);
-const lastUpdated = ref<Date>(new Date());
-const isLoading = ref<boolean>(true);
-const error = ref<string | null>(null);
+  // Estado reactivo
+  const purchasePrice = ref<number>(0);
+  const salePrice = ref<number>(0);
+  const lastUpdated = ref<Date>(new Date());
+  const isLoading = ref<boolean>(true);
+  const error = ref<string | null>(null);
 
-// Repository (inyección de dependencia)
-const repository = new FirebaseExchangeRateRepository();
+  // Repository (inyección de dependencia)
+  const repository = new FirebaseExchangeRateRepository();
 
-// Acciones
-const fetchRates = async () => {
+  // Acciones
+  const fetchRates = async () => {
     try {
-    isLoading.value = true;
-    error.value = null;
+      isLoading.value = true;
+      error.value = null;
 
-    const rates = await repository.getExchangeRates();
+      const rates = await repository.getExchangeRates();
 
-    purchasePrice.value = rates.purchasePrice;
-    salePrice.value = rates.salePrice;
-    lastUpdated.value = rates.timestamp;
+      purchasePrice.value = rates.purchasePrice;
+      salePrice.value = rates.salePrice;
+      lastUpdated.value = rates.timestamp;
     } catch (err) {
-    error.value = err instanceof Error ? err.message : 'Error fetching rates';
-    console.error('Error fetching exchange rates:', err);
+      error.value = err instanceof Error ? err.message : 'Error fetching rates';
+      console.error('Error fetching exchange rates:', err);
     } finally {
-    isLoading.value = false;
+      isLoading.value = false;
     }
-};
+  };
 
-// Suscripción a cambios en tiempo real
-let unsubscribe: (() => void) | null = null;
+  // Suscripción a cambios en tiempo real
+  let unsubscribe: (() => void) | null = null;
 
-const subscribeToRates = () => {
+  const subscribeToRates = () => {
     try {
-    unsubscribe = repository.subscribeToRates((rates: ExchangeRate) => {
+      unsubscribe = repository.subscribeToRates((rates: ExchangeRate) => {
         purchasePrice.value = rates.purchasePrice;
         salePrice.value = rates.salePrice;
         lastUpdated.value = rates.timestamp;
         isLoading.value = false;
-    });
+      });
     } catch (err) {
-    error.value = err instanceof Error ? err.message : 'Error subscribing to rates';
+      error.value =
+        err instanceof Error ? err.message : 'Error subscribing to rates';
     }
-};
+  };
 
-const unsubscribeFromRates = () => {
+  const unsubscribeFromRates = () => {
     if (unsubscribe) {
-    unsubscribe();
-    unsubscribe = null;
+      unsubscribe();
+      unsubscribe = null;
     }
-};
+  };
 
-// Getters computados
-const rates = computed(() => ({
+  // Getters computados
+  const rates = computed(() => ({
     purchasePrice: purchasePrice.value,
     salePrice: salePrice.value,
-    lastUpdated: lastUpdated.value
-}));
+    lastUpdated: lastUpdated.value,
+  }));
 
-return {
+  return {
     // Estado
     purchasePrice: readonly(purchasePrice),
     salePrice: readonly(salePrice),
@@ -77,6 +77,6 @@ return {
     // Acciones
     fetchRates,
     subscribeToRates,
-    unsubscribeFromRates
-};
+    unsubscribeFromRates,
+  };
 });
