@@ -5,6 +5,13 @@ export default defineNuxtConfig({
   //configuracion para Pinia
   modules: ['@pinia/nuxt', '@nuxt/eslint', '@nuxt/fonts', '@nuxt/test-utils'],
 
+  // Configurar Google Fonts
+  fonts: {
+    google: {
+      families: ['Rubik:400,500,600,700']
+    }
+  },
+
   //configuramos plugins
   plugins: [
     '../plugins/firebase.client.ts'
