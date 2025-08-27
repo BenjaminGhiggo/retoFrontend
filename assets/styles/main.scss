@@ -8,7 +8,7 @@ body {
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
     Cantarell, sans-serif;
-  background: #512eba;
+  background: linear-gradient(180deg, #4A28AF 0%, #6E46E6 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -213,6 +213,7 @@ body {
   body {
     padding: 0;
     align-items: stretch;
+    background: #522FBA;
   }
 
   .container {
@@ -260,7 +261,7 @@ body {
   .container::after {
     content: '';
     flex: 1;
-    background: #512eba;
+    background: #522FBA;
     min-height: 25%;
   }
 }
