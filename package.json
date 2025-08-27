@@ -16,6 +16,7 @@
     "@nuxt/fonts": "^0.11.4",
     "@nuxt/test-utils": "^3.19.2",
     "@pinia/nuxt": "^0.11.2",
+    "dotenv": "^17.2.1",
     "eslint": "^9.34.0",
     "firebase": "^12.1.0",
     "nuxt": "^4.0.3",
@@ -24,6 +25,7 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@types/node": "^24.3.0",
     "prettier": "^3.6.2",
     "sass": "^1.91.0"
   }
