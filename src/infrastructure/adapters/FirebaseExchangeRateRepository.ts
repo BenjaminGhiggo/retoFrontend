@@ -12,6 +12,17 @@ interface FirebasePlugin {
   };
 }
 
+// Type guard function - más seguro que 'as'
+function isFirebasePlugin(obj: any): obj is FirebasePlugin {
+  return obj &&
+    typeof obj === 'object' &&
+    'db' in obj &&
+    'collections' in obj &&
+    'documents' in obj &&
+    typeof obj.collections?.RATES === 'string' &&
+    typeof obj.documents?.EXCHANGE_RATES === 'string';
+}
+
 export class FirebaseExchangeRateRepository implements IExchangeRateRepository {
   private db: Firestore;
   private collectionName: string;
@@ -22,20 +33,27 @@ export class FirebaseExchangeRateRepository implements IExchangeRateRepository {
     try {
       // Acceder al Firebase desde el plugin
       const nuxtApp = useNuxtApp();
-      console.log('📱 NuxtApp obtained:', Object.keys(nuxtApp));
+      console.log('📱 NuxtApp obtained, keys:', Object.keys(nuxtApp));
       
-      const firebase = nuxtApp.$firebase as FirebasePlugin;
-      console.log('🔥 $firebase from plugin:', firebase);
+      // Usar type guard para validar + 'as' solo para TypeScript
+      const firebaseCandidate = nuxtApp.$firebase;
       
-      if (!firebase) {
-        throw new Error('Firebase plugin not found in NuxtApp');
+      if (!isFirebasePlugin(firebaseCandidate)) {
+        throw new Error('Invalid Firebase plugin structure in NuxtApp');
       }
+      
+      // Ya validamos con type guard, ahora 'as' es seguro
+      const firebase = firebaseCandidate as FirebasePlugin;
       
       this.db = firebase.db;
       this.collectionName = firebase.collections.RATES;
       this.documentId = firebase.documents.EXCHANGE_RATES;
       
-      console.log('✅ Firebase repository initialized successfully');
+      console.log('✅ Firebase repository initialized with:', {
+        dbType: typeof firebase.db,
+        collectionName: this.collectionName,
+        documentId: this.documentId
+      });
     } catch (error) {
       console.error('❌ Error in FirebaseExchangeRateRepository constructor:', error);
       throw error;
