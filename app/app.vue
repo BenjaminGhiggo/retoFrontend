@@ -20,6 +20,7 @@
 
         <div class="converter">
           <div class="input-group">
+
             <div class="currency-input">
               <span class="currency-label">Dólares</span>
               <div class="amount-display">
@@ -33,6 +34,8 @@
                 >
               </div>
             </div>
+
+
           </div>
 
           <div class="converter-button">
