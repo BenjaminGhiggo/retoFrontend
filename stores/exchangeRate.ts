@@ -14,8 +14,20 @@ export const useExchangeRateStore = defineStore('exchangeRate', () => {
   let repository: FirebaseExchangeRateRepository | null = null;
 
   const getRepository = () => {
+    console.log('🔍 getRepository called:', {
+      hasRepository: !!repository,
+      isClient: import.meta.client,
+      environment: import.meta.env?.SSR ? 'server' : 'client'
+    });
+    
     if (!repository && import.meta.client) {
-      repository = new FirebaseExchangeRateRepository();
+      console.log('📝 Creating new FirebaseExchangeRateRepository...');
+      try {
+        repository = new FirebaseExchangeRateRepository();
+        console.log('✅ Repository created successfully');
+      } catch (error) {
+        console.error('❌ Error creating repository:', error);
+      }
     }
     return repository;
   };
@@ -78,11 +90,11 @@ export const useExchangeRateStore = defineStore('exchangeRate', () => {
 
   return {
     // Estado
-    purchasePrice: readonly(purchasePrice),
-    salePrice: readonly(salePrice),
-    lastUpdated: readonly(lastUpdated),
-    isLoading: readonly(isLoading),
-    error: readonly(error),
+    purchasePrice,
+    salePrice,
+    lastUpdated,
+    isLoading,
+    error,
 
     // Getters
     rates,

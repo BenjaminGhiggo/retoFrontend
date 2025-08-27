@@ -5,10 +5,16 @@ export default defineNuxtConfig({
   //configuracion para Pinia
   modules: ['@pinia/nuxt', '@nuxt/eslint', '@nuxt/fonts', '@nuxt/test-utils'],
 
+  //configuramos plugins
+  plugins: [
+    '../plugins/firebase.client.ts'
+  ],
+
   //configuramos Typescript estricto
   typescript: {
     strict: true,
     typeCheck: true,
+    includeWorkspace: true,
   },
   css: ['../assets/styles/main.scss'],
 

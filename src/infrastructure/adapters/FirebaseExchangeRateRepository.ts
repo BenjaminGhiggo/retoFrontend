@@ -18,11 +18,28 @@ export class FirebaseExchangeRateRepository implements IExchangeRateRepository {
   private documentId: string;
 
   constructor() {
-    // Acceder al Firebase desde el plugin
-    const { $firebase } = useNuxtApp() as unknown as { $firebase: FirebasePlugin };
-    this.db = $firebase.db;
-    this.collectionName = $firebase.collections.RATES;
-    this.documentId = $firebase.documents.EXCHANGE_RATES;
+    console.log('🏗️ FirebaseExchangeRateRepository constructor called');
+    try {
+      // Acceder al Firebase desde el plugin
+      const nuxtApp = useNuxtApp();
+      console.log('📱 NuxtApp obtained:', Object.keys(nuxtApp));
+      
+      const firebase = nuxtApp.$firebase as FirebasePlugin;
+      console.log('🔥 $firebase from plugin:', firebase);
+      
+      if (!firebase) {
+        throw new Error('Firebase plugin not found in NuxtApp');
+      }
+      
+      this.db = firebase.db;
+      this.collectionName = firebase.collections.RATES;
+      this.documentId = firebase.documents.EXCHANGE_RATES;
+      
+      console.log('✅ Firebase repository initialized successfully');
+    } catch (error) {
+      console.error('❌ Error in FirebaseExchangeRateRepository constructor:', error);
+      throw error;
+    }
   }
 
   async getExchangeRates(): Promise<ExchangeRate> {

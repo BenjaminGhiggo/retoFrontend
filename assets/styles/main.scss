@@ -57,7 +57,7 @@ body {
   background: white;
   border-radius: 16px;
   padding: 32px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px hsla(0, 0%, 100%, 0.1);
   width: 500px;
   flex-shrink: 0;
 }
@@ -142,6 +142,27 @@ body {
   font-size: 1.3rem;
   font-weight: 600;
   color: #333;
+}
+
+.amount-input {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+  background: none;
+  border: none;
+  outline: none;
+  text-align: right;
+  width: 100%;
+  min-width: 80px;
+}
+
+.amount-input:readonly {
+  color: #666;
+  cursor: default;
+}
+
+.amount-input::placeholder {
+  color: #999;
 }
 
 .converter-button {

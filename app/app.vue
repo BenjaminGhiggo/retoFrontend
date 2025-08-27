@@ -23,8 +23,14 @@
             <div class="currency-input">
               <span class="currency-label">Dólares</span>
               <div class="amount-display">
-                <span class="send-label">Envías</span>
-                <span class="amount">$ 3945</span>
+                <span class="send-label">{{ isUsdToPen ? 'Envías' : 'Recibes' }}</span>
+                <input 
+                  v-model.number="usdAmount" 
+                  type="number" 
+                  class="amount-input"
+                  :readonly="!isUsdToPen"
+                  @input="onUsdInput"
+                >
               </div>
             </div>
           </div>
@@ -34,6 +40,7 @@
               src="/boton_convertion.png"
               alt="Convertir"
               class="converter-icon"
+              @click="toggleConversion"
             >
           </div>
 
@@ -41,8 +48,14 @@
             <div class="currency-input">
               <span class="currency-label">Soles</span>
               <div class="amount-display">
-                <span class="receive-label">Recibes</span>
-                <span class="amount">S/ 3945</span>
+                <span class="receive-label">{{ isUsdToPen ? 'Recibes' : 'Envías' }}</span>
+                <input 
+                  v-model.number="penAmount" 
+                  type="number" 
+                  class="amount-input"
+                  :readonly="isUsdToPen"
+                  @input="onPenInput"
+                >
               </div>
             </div>
           </div>
@@ -57,6 +70,8 @@
 <script setup>
 // Import del store
 import { useExchangeRateStore } from '../stores/exchangeRate';
+// Import del composable (comentado temporalmente para debug)
+// import { useConverter } from '../composables/useConverter';
 
 const exchangeStore = useExchangeRateStore();
 
@@ -69,10 +84,51 @@ const salePrice = computed(() => {
   return exchangeStore.salePrice || 3.945;
 });
 
+// Estados locales para los inputs
+const usdAmount = ref(1000);
+const penAmount = ref(3924);
+const isUsdToPen = ref(true); // true = USD → PEN, false = PEN → USD
+
+// Conversión automática usando tasas directamente (sin composable)
+const convertCurrency = async () => {
+  try {
+    if (isUsdToPen.value) {
+      // Convertir USD → PEN usando purchase_price
+      penAmount.value = Math.round(usdAmount.value * purchasePrice.value * 100) / 100;
+    } else {
+      // Convertir PEN → USD usando sale_price  
+      usdAmount.value = Math.round(penAmount.value / salePrice.value * 100) / 100;
+    }
+  } catch (error) {
+    console.error('Error en conversión:', error);
+  }
+};
+
+// Handlers para inputs
+const onUsdInput = () => {
+  if (isUsdToPen.value) {
+    convertCurrency();
+  }
+};
+
+const onPenInput = () => {
+  if (!isUsdToPen.value) {
+    convertCurrency();
+  }
+};
+
+// Función para alternar la dirección de conversión
+const toggleConversion = () => {
+  isUsdToPen.value = !isUsdToPen.value;
+  convertCurrency();
+};
+
 // Solo ejecutar en cliente
 if (import.meta.client) {
   onMounted(() => {
     exchangeStore.subscribeToRates();
+    // Conversión inicial
+    convertCurrency();
   });
 
   onUnmounted(() => {
