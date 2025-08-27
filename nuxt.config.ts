@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     strict: true,
     typeCheck: true,
   },
+  css: ['../assets/styles/main.scss'],
 
   // Configuramos Sass
   vite: {
