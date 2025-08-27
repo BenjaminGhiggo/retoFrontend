@@ -10,7 +10,7 @@ export class ConvertCurrencyUseCase {
   async convertPenToUsd(penAmount: number): Promise<ConversionResult> {
     // metodo para convertir de PEN a USD
     // del reto tecnico: (monto en soles)/ sale_price = monto en dolares
-    const rates = await this.exchangeRateRepository.getExchangeRate(); // obtenemos las tasas de cambio
+    const rates = await this.exchangeRateRepository.getExchangeRates(); // obtenemos las tasas de cambio
     const convertedAmount = penAmount / rates.salePrice;
 
     return {
@@ -25,7 +25,7 @@ export class ConvertCurrencyUseCase {
   async convertUsdToPen(usdAmount: number): Promise<ConversionResult> {
     // metodo para convertir de USD a PEN
     // del reto tecnico: (monto en dolares) * purchase_price = monto en soles
-    const rates = await this.exchangeRateRepository.getExchangeRate(); // obtenemos las tasas de cambio
+    const rates = await this.exchangeRateRepository.getExchangeRates(); // obtenemos las tasas de cambio
     const convertedAmount = usdAmount * rates.purchasePrice;
 
     return {
