@@ -2,6 +2,16 @@ import { doc, getDoc, onSnapshot, type Firestore } from 'firebase/firestore';
 import type { IExchangeRateRepository } from '../../domain/ports/IExchangeRateRepository';
 import type { ExchangeRate } from '../../domain/entities/ExchangeRate';
 
+interface FirebasePlugin {
+  db: Firestore;
+  collections: {
+    RATES: string;
+  };
+  documents: {
+    EXCHANGE_RATES: string;
+  };
+}
+
 export class FirebaseExchangeRateRepository implements IExchangeRateRepository {
   private db: Firestore;
   private collectionName: string;
@@ -9,7 +19,7 @@ export class FirebaseExchangeRateRepository implements IExchangeRateRepository {
 
   constructor() {
     // Acceder al Firebase desde el plugin
-    const { $firebase } = useNuxtApp() as any;
+    const { $firebase } = useNuxtApp() as unknown as { $firebase: FirebasePlugin };
     this.db = $firebase.db;
     this.collectionName = $firebase.collections.RATES;
     this.documentId = $firebase.documents.EXCHANGE_RATES;

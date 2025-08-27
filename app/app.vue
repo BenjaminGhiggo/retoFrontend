@@ -2,8 +2,8 @@
   <div class="container">
     <div class="content">
       <div class="hero-text">
-        <h1>El mejor<br>tipo de cambio</h1>
-        <p>para cambiar dólares y soles<br>online en Perú</p>
+        <h1>El mejor<br >tipo de cambio</h1>
+        <p>para cambiar dólares y soles<br >online en Perú</p>
       </div>
 
       <div class="exchange-card">
@@ -30,7 +30,11 @@
           </div>
 
           <div class="converter-button">
-            <img src="/boton_convertion.png" alt="Convertir" class="converter-icon">
+            <img
+              src="/boton_convertion.png"
+              alt="Convertir"
+              class="converter-icon"
+            >
           </div>
 
           <div class="input-group">
@@ -66,7 +70,7 @@ const salePrice = computed(() => {
 });
 
 // Solo ejecutar en cliente
-if (process.client) {
+if (import.meta.client) {
   onMounted(() => {
     exchangeStore.subscribeToRates();
   });

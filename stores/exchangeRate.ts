@@ -14,7 +14,7 @@ export const useExchangeRateStore = defineStore('exchangeRate', () => {
   let repository: FirebaseExchangeRateRepository | null = null;
 
   const getRepository = () => {
-    if (!repository && process.client) {
+    if (!repository && import.meta.client) {
       repository = new FirebaseExchangeRateRepository();
     }
     return repository;
@@ -24,7 +24,7 @@ export const useExchangeRateStore = defineStore('exchangeRate', () => {
   const fetchRates = async () => {
     const repo = getRepository();
     if (!repo) return; // No hacer nada en servidor
-    
+
     try {
       isLoading.value = true;
       error.value = null;
@@ -48,7 +48,7 @@ export const useExchangeRateStore = defineStore('exchangeRate', () => {
   const subscribeToRates = () => {
     const repo = getRepository();
     if (!repo) return; // No hacer nada en servidor
-    
+
     try {
       unsubscribe = repo.subscribeToRates((rates: ExchangeRate) => {
         purchasePrice.value = rates.purchasePrice;
