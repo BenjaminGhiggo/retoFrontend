@@ -18,7 +18,7 @@ export const useExchangeRateStore = defineStore('exchangeRate', () => {
     if (!repository && import.meta.client) {
       try {
         repository = new FirebaseExchangeRateRepository();
-      } catch (error) {
+      } catch {
         // Error handled silently
       }
     }

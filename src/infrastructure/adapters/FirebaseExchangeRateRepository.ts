@@ -37,46 +37,37 @@ export class FirebaseExchangeRateRepository implements IExchangeRateRepository {
   private documentId: string;
 
   constructor() {
-    try {
-      // Acceder al Firebase desde el plugin
-      const nuxtApp = useNuxtApp();
+    // Acceder al Firebase desde el plugin
+    const nuxtApp = useNuxtApp();
 
-      // Usar type guard para validar + 'as' solo para TypeScript
-      const firebaseCandidate = nuxtApp.$firebase;
+    // Usar type guard para validar + 'as' solo para TypeScript
+    const firebaseCandidate = nuxtApp.$firebase;
 
-      if (!isFirebasePlugin(firebaseCandidate)) {
-        throw new Error('Invalid Firebase plugin structure in NuxtApp');
-      }
-
-      // Ya validamos con type guard, ahora 'as' es seguro
-      const firebase = firebaseCandidate as FirebasePlugin;
-
-      this.db = firebase.db;
-      this.collectionName = firebase.collections.RATES;
-      this.documentId = firebase.documents.EXCHANGE_RATES;
-
-    } catch (error) {
-      throw error;
+    if (!isFirebasePlugin(firebaseCandidate)) {
+      throw new Error('Invalid Firebase plugin structure in NuxtApp');
     }
+
+    // Ya validamos con type guard, ahora 'as' es seguro
+    const firebase = firebaseCandidate as FirebasePlugin;
+
+    this.db = firebase.db;
+    this.collectionName = firebase.collections.RATES;
+    this.documentId = firebase.documents.EXCHANGE_RATES;
   }
 
   async getExchangeRates(): Promise<ExchangeRate> {
-    try {
-      const docRef = doc(this.db, this.collectionName, this.documentId);
-      const docSnap = await getDoc(docRef);
+    const docRef = doc(this.db, this.collectionName, this.documentId);
+    const docSnap = await getDoc(docRef);
 
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        return {
-          purchasePrice: data.purchase_price,
-          salePrice: data.sale_price,
-          timestamp: new Date().toISOString(),
-        };
-      } else {
-        throw new Error('No exchange rate data found');
-      }
-    } catch (error) {
-      throw error;
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      return {
+        purchasePrice: data.purchase_price,
+        salePrice: data.sale_price,
+        timestamp: new Date().toISOString(),
+      };
+    } else {
+      throw new Error('No exchange rate data found');
     }
   }
 

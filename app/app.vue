@@ -2,8 +2,8 @@
   <div class="container">
     <div class="content">
       <div class="hero-text">
-        <h1>El mejor<br />tipo de cambio</h1>
-        <p>para cambiar dólares y soles<br />online en Perú</p>
+        <h1>El mejor<br >tipo de cambio</h1>
+        <p>para cambiar dólares y soles<br >online en Perú</p>
       </div>
 
       <div class="exchange-card">
@@ -46,7 +46,7 @@
                     step="0.01"
                     min="0"
                     @input="onUsdInput"
-                  />
+                  >
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
               alt="Convertir"
               class="converter-icon"
               @click="toggleConversion"
-            />
+            >
           </div>
 
           <div class="input-group">
@@ -80,7 +80,7 @@
                     step="0.01"
                     min="0"
                     @input="onPenInput"
-                  />
+                  >
                 </div>
               </div>
             </div>
