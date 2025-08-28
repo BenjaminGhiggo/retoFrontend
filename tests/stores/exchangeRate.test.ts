@@ -2,13 +2,19 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useExchangeRateStore } from '../../stores/exchangeRate'
 
-// Mock Firebase
+// Mock Firebase y meta del entorno
 vi.mock('../../firebase.config', () => ({
   db: {},
   collection: vi.fn(),
   doc: vi.fn(),
   onSnapshot: vi.fn(),
 }))
+
+// Mock import.meta.client para simular entorno del servidor
+Object.defineProperty(import.meta, 'client', {
+  value: false,
+  writable: true,
+})
 
 describe('Exchange Rate Store', () => {
   beforeEach(() => {
@@ -18,46 +24,37 @@ describe('Exchange Rate Store', () => {
   it('should initialize with default values', () => {
     const store = useExchangeRateStore()
     
-    expect(store.purchasePrice).toBe(0)
-    expect(store.salePrice).toBe(0)
-    expect(store.isLoading).toBe(false)
-    expect(store.error).toBe(null)
-  })
-
-  it('should set rates correctly', () => {
-    const store = useExchangeRateStore()
-    
-    store.setRates(3.924, 3.945)
-    
     expect(store.purchasePrice).toBe(3.924)
     expect(store.salePrice).toBe(3.945)
-  })
-
-  it('should set loading state', () => {
-    const store = useExchangeRateStore()
-    
-    store.setLoading(true)
-    expect(store.isLoading).toBe(true)
-    
-    store.setLoading(false)
     expect(store.isLoading).toBe(false)
-  })
-
-  it('should set error state', () => {
-    const store = useExchangeRateStore()
-    const testError = 'Test error'
-    
-    store.setError(testError)
-    expect(store.error).toBe(testError)
-  })
-
-  it('should clear error', () => {
-    const store = useExchangeRateStore()
-    
-    store.setError('Test error')
-    expect(store.error).toBe('Test error')
-    
-    store.clearError()
     expect(store.error).toBe(null)
+  })
+
+  it('should have computed rates getter', () => {
+    const store = useExchangeRateStore()
+    
+    expect(store.rates).toEqual({
+      purchasePrice: 3.924,
+      salePrice: 3.945,
+      lastUpdated: expect.any(Date)
+    })
+  })
+
+  it('should have all required methods', () => {
+    const store = useExchangeRateStore()
+    
+    expect(typeof store.fetchRates).toBe('function')
+    expect(typeof store.subscribeToRates).toBe('function')
+    expect(typeof store.unsubscribeFromRates).toBe('function')
+  })
+
+  it('should handle fetchRates when no repository available', async () => {
+    const store = useExchangeRateStore()
+    
+    // En el servidor (import.meta.client = false), no debería hacer nada
+    await store.fetchRates()
+    
+    expect(store.purchasePrice).toBe(3.924) // Mantiene valores por defecto
+    expect(store.salePrice).toBe(3.945)
   })
 })

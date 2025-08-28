@@ -13,7 +13,7 @@ interface FirebasePlugin {
 }
 
 // Type guard function - más seguro que 'as'
-function isFirebasePlugin(obj: any): obj is FirebasePlugin {
+function isFirebasePlugin(obj: unknown): obj is FirebasePlugin {
   return obj &&
     typeof obj === 'object' &&
     'db' in obj &&

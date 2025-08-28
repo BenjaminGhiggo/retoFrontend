@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { ref, computed } from 'vue';
 import type { ExchangeRate } from '../src/domain/entities/ExchangeRate';
 import { FirebaseExchangeRateRepository } from '../src/infrastructure/adapters/FirebaseExchangeRateRepository';
 
