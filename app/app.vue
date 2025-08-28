@@ -22,16 +22,21 @@
           <div class="input-group">
 
             <div class="currency-input">
-              <span class="currency-label">Dólares</span>
+              <div class="currency-info">
+                <span class="currency-label">Dólares</span>
+              </div>
               <div class="amount-display">
                 <span class="send-label">{{ isUsdToPen ? 'Envías' : 'Recibes' }}</span>
-                <input 
-                  v-model.number="usdAmount" 
-                  type="number" 
-                  class="amount-input"
-                  :readonly="!isUsdToPen"
-                  @input="onUsdInput"
-                >
+                <div class="amount-wrapper">
+                  <span class="amount-symbol">$</span>
+                  <input 
+                    v-model.number="usdAmount" 
+                    type="number" 
+                    class="amount-input"
+                    :readonly="!isUsdToPen"
+                    @input="onUsdInput"
+                  >
+                </div>
               </div>
             </div>
 
@@ -49,16 +54,21 @@
 
           <div class="input-group">
             <div class="currency-input">
-              <span class="currency-label">Soles</span>
+              <div class="currency-info">
+                <span class="currency-label">Soles</span>
+              </div>
               <div class="amount-display">
                 <span class="receive-label">{{ isUsdToPen ? 'Recibes' : 'Envías' }}</span>
-                <input 
-                  v-model.number="penAmount" 
-                  type="number" 
-                  class="amount-input"
-                  :readonly="isUsdToPen"
-                  @input="onPenInput"
-                >
+                <div class="amount-wrapper">
+                  <span class="amount-symbol">S/</span>
+                  <input 
+                    v-model.number="penAmount" 
+                    type="number" 
+                    class="amount-input"
+                    :readonly="isUsdToPen"
+                    @input="onPenInput"
+                  >
+                </div>
               </div>
             </div>
           </div>
