@@ -15,13 +15,15 @@ interface FirebasePlugin {
 // Type guard function - más seguro que 'as'
 function isFirebasePlugin(obj: unknown): obj is FirebasePlugin {
   return (
-    obj &&
+    obj !== null &&
     typeof obj === 'object' &&
     'db' in obj &&
     'collections' in obj &&
     'documents' in obj &&
-    typeof obj.collections?.RATES === 'string' &&
-    typeof obj.documents?.EXCHANGE_RATES === 'string'
+    typeof (obj as any).collections === 'object' &&
+    typeof (obj as any).documents === 'object' &&
+    typeof (obj as any).collections?.RATES === 'string' &&
+    typeof (obj as any).documents?.EXCHANGE_RATES === 'string'
   );
 }
 
@@ -31,11 +33,9 @@ export class FirebaseExchangeRateRepository implements IExchangeRateRepository {
   private documentId: string;
 
   constructor() {
-    console.log('🏗️ FirebaseExchangeRateRepository constructor called');
     try {
       // Acceder al Firebase desde el plugin
       const nuxtApp = useNuxtApp();
-      console.log('📱 NuxtApp obtained, keys:', Object.keys(nuxtApp));
 
       // Usar type guard para validar + 'as' solo para TypeScript
       const firebaseCandidate = nuxtApp.$firebase;
@@ -51,16 +51,7 @@ export class FirebaseExchangeRateRepository implements IExchangeRateRepository {
       this.collectionName = firebase.collections.RATES;
       this.documentId = firebase.documents.EXCHANGE_RATES;
 
-      console.log('✅ Firebase repository initialized with:', {
-        dbType: typeof firebase.db,
-        collectionName: this.collectionName,
-        documentId: this.documentId,
-      });
     } catch (error) {
-      console.error(
-        '❌ Error in FirebaseExchangeRateRepository constructor:',
-        error
-      );
       throw error;
     }
   }
@@ -81,7 +72,6 @@ export class FirebaseExchangeRateRepository implements IExchangeRateRepository {
         throw new Error('No exchange rate data found');
       }
     } catch (error) {
-      console.error('Error fetching exchange rates:', error);
       throw error;
     }
   }

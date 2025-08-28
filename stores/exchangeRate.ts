@@ -15,19 +15,11 @@ export const useExchangeRateStore = defineStore('exchangeRate', () => {
   let repository: FirebaseExchangeRateRepository | null = null;
 
   const getRepository = () => {
-    console.log('🔍 getRepository called:', {
-      hasRepository: !!repository,
-      isClient: import.meta.client,
-      environment: import.meta.env?.SSR ? 'server' : 'client',
-    });
-
     if (!repository && import.meta.client) {
-      console.log('📝 Creating new FirebaseExchangeRateRepository...');
       try {
         repository = new FirebaseExchangeRateRepository();
-        console.log('✅ Repository created successfully');
       } catch (error) {
-        console.error('❌ Error creating repository:', error);
+        // Error handled silently
       }
     }
     return repository;

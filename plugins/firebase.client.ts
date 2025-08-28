@@ -3,7 +3,6 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
 export default defineNuxtPlugin((nuxtApp) => {
-  console.log('🔧 Firebase plugin initializing...');
 
   const firebaseConfig = {
     apiKey: 'AIzaSyAvoWBm4sf53VyqFUuFvzerV6uC4XgYtD0',
@@ -28,8 +27,6 @@ export default defineNuxtPlugin((nuxtApp) => {
       EXCHANGE_RATES: 'awaOMswZ8JGxjmHCpVZ4',
     },
   };
-
-  console.log('📦 Firebase plugin object:', firebasePlugin);
 
   nuxtApp.provide('firebase', firebasePlugin);
 });
