@@ -152,6 +152,7 @@ body {
   color: #9CA3AF;
   margin-bottom: 2px;
   font-weight: 500;
+  padding-right: 25px;
 }
 
 .amount-wrapper {
@@ -235,24 +236,36 @@ input[type="number"] {
   body {
     background: #522FBA;
     padding: 0;
+    align-items: stretch;
+    min-height: 100vh;
+    display: flex;
     flex-direction: column;
   }
 
   .container {
     flex-direction: column;
     gap: 0;
+    flex: 1;
+    padding: 0;
+    justify-content: space-between;
+    background: #522FBA;
     min-height: 100vh;
   }
 
   .content {
     flex-direction: column;
     flex: 1;
+    justify-content: center;
+    display: flex;
+    background: #522FBA;
   }
 
   .hero-text {
     margin-right: 0;
     padding: 60px 24px 40px;
     text-align: center;
+    flex: 0 0 auto;
+    background: #522FBA;
   }
 
   .hero-text h1 {
@@ -263,17 +276,34 @@ input[type="number"] {
     font-size: 1rem;
   }
 
+  .send-label,
+  .receive-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #9CA3AF;
+    margin-bottom: 2px;
+    font-weight: 500;
+    padding-right: 35.5px;
+  }
+
   .exchange-card {
     width: 100%;
+    max-width: none;
     border-radius: 0;
+    margin-top: auto;
+    margin-bottom: 0;
     padding: 32px 24px;
     box-shadow: none;
+    flex: 0 0 auto;
+    background: white;
   }
 
   .container::after {
     content: '';
+    display: block;
     height: 25vh;
     background: #522FBA;
+    flex-shrink: 0;
   }
 
   .currency-info {
@@ -304,6 +334,15 @@ input[type="number"] {
     font-size: 2rem;
   }
 
+  .send-label,
+  .receive-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #9CA3AF;
+    margin-bottom: 2px;
+    font-weight: 500;
+    padding-right: 27px;
+  }
   .exchange-card {
     padding: 28px 20px;
   }
