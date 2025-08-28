@@ -8,11 +8,19 @@
 
       <div class="exchange-card">
         <div class="rates">
-          <div class="rate-item active">
+          <div 
+            class="rate-item"
+            :class="{ active: isUsdToPen }"
+            @click="switchToBuyRate"
+          >
             <span class="label">Dólar compra</span>
             <span class="value">{{ (purchasePrice || 3.924).toFixed(4) }}</span>
           </div>
-          <div class="rate-item">
+          <div 
+            class="rate-item"
+            :class="{ active: !isUsdToPen }"
+            @click="switchToSellRate"
+          >
             <span class="label">Dólar venta</span>
             <span class="value">{{ (salePrice || 3.945).toFixed(4) }}</span>
           </div>
