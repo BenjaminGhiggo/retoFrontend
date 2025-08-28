@@ -54,7 +54,7 @@
 
           <div class="converter-button">
             <img
-              src="/boton_convertion.png"
+              src="/boton_converter.svg"
               alt="Convertir"
               class="converter-icon"
               @click="toggleConversion"
