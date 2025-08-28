@@ -42,6 +42,8 @@
                     type="number" 
                     class="amount-input"
                     :readonly="!isUsdToPen"
+                    step="0.01"
+                    min="0"
                     @input="onUsdInput"
                   >
                 </div>
@@ -74,6 +76,8 @@
                     type="number" 
                     class="amount-input"
                     :readonly="isUsdToPen"
+                    step="0.01"
+                    min="0"
                     @input="onPenInput"
                   >
                 </div>
@@ -127,12 +131,14 @@ const convertCurrency = async () => {
 
 // Handlers para inputs
 const onUsdInput = () => {
+  if (usdAmount.value < 0) usdAmount.value = 0;
   if (isUsdToPen.value) {
     convertCurrency();
   }
 };
 
 const onPenInput = () => {
+  if (penAmount.value < 0) penAmount.value = 0;
   if (!isUsdToPen.value) {
     convertCurrency();
   }

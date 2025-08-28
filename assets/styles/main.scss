@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: linear-gradient(180deg, #4A28AF 0%, #6E46E6 100%);
   min-height: 100vh;
   display: flex;
@@ -15,11 +15,9 @@ body {
 }
 
 .container {
-  width: 100%;
   max-width: 1200px;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 80px;
 }
 
@@ -28,27 +26,27 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
 }
 
 .hero-text {
   flex: 1;
   color: white;
-  margin-right: 60px;
+  margin-right: 80px;
 }
 
 .hero-text h1 {
   font-size: 3.5rem;
   font-weight: 700;
-  line-height: 1.1;
-  margin-bottom: 20px;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
 }
 
 .hero-text p {
-  font-size: 1.2rem;
-  font-weight: 400;
-  line-height: 1.4;
-  opacity: 0.9;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  opacity: 0.95;
 }
 
 .exchange-card {
@@ -62,10 +60,8 @@ body {
 
 .rates {
   display: flex;
-  gap: 0;
   margin-bottom: 36px;
   border-radius: 12px;
-  overflow: hidden;
   background: #F5F5F7;
   padding: 4px;
 }
@@ -77,7 +73,6 @@ body {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: transparent;
 }
 
 .rate-item.active {
@@ -93,59 +88,48 @@ body {
   font-weight: 500;
 }
 
-.rate-item .value {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #333;
+.rate-item.active .label {
+  color: #6B46F2;
 }
 
-.rate-item.active .label {
-  color: #512eba;
+.rate-item .value {
+  display: block;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #374151;
 }
 
 .rate-item.active .value {
-  color: #512eba;
-  border-bottom: 3px solid #512eba;
-  padding-bottom: 4px;
+  color: #6B46F2;
 }
 
 .converter {
-  margin-bottom: 32px;
-  position: relative;
+  margin-bottom: 28px;
 }
 
 .input-group {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .currency-input {
-  border: 2px solid #512eba;
-  border-radius: 12px;
-  padding: 20px;
+  border: 2px solid #E5E7EB;
+  border-radius: 16px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: border-color 0.2s ease;
+  transition: all 0.2s ease;
+  overflow: hidden;
 }
 
-.currency-input:hover {
-  border-color: #6B46F2;
-}
-
+.currency-input:hover,
 .currency-input:focus-within {
   border-color: #6B46F2;
-  box-shadow: 0 0 0 3px rgba(107, 70, 242, 0.1);
 }
 
-/* Área sombreada para labels de moneda */
 .currency-info {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px 16px;
   background: #F9FAFB;
-  border-radius: 0 12px 12px 0;
   min-width: 120px;
 }
 
@@ -168,55 +152,52 @@ body {
   color: #9CA3AF;
   margin-bottom: 2px;
   font-weight: 500;
-  letter-spacing: 0.025em;
 }
 
 .amount-wrapper {
-  display: flex;
-  align-items: baseline;
-  justify-content: flex-end;
-  gap: 4px;
+  display: inline;
+  text-align: right;
 }
 
 .amount-symbol {
   font-size: 1.25rem;
   font-weight: 600;
   color: #1F2937;
-}
-
-.amount {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #333;
+  margin-right: 0px;
 }
 
 .amount-input {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  color: #333;
-  background: none;
+  color: #1F2937;
   border: none;
   outline: none;
-  text-align: right;
-  width: 100%;
-  min-width: 80px;
+  text-align: center;
+  max-width: 100px;
+  min-width: 60px;
+  overflow: hidden;
 }
 
 .amount-input:readonly {
-  color: #666;
-  cursor: default;
+  color: #6B7280;
 }
 
-.amount-input::placeholder {
-  color: #999;
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .converter-button {
   display: flex;
   justify-content: center;
-  margin: -8px 0;
-  position: relative;
-  z-index: 1;
+  margin: -10px 0;
+  z-index: 10;
 }
 
 .converter-icon {
@@ -232,89 +213,49 @@ body {
 
 .start-operation-btn {
   width: 100%;
-  background: #512eba;
+  background: #6B46F2;
   color: white;
   border: none;
   padding: 18px 24px;
-  border-radius: 12px;
-  font-size: 1.1rem;
+  border-radius: 14px;
+  font-size: 1.0625rem;
   font-weight: 600;
   cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .start-operation-btn:hover {
+  background: #5B3ACC;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px #6366f14d;
+  box-shadow: 0 12px 24px rgba(107, 70, 242, 0.3);
 }
 
-.start-operation-btn:active {
-  transform: translateY(0);
-}
-
-// Responsive Design
 @media (max-width: 768px) {
   body {
+    background: #522FBA;
     padding: 0;
-    align-items: stretch;
-    background: #522fba;
+    flex-direction: column;
   }
 
   .container {
-    gap: 0;
-    height: 100vh;
     flex-direction: column;
+    gap: 0;
+    min-height: 100vh;
   }
 
   .content {
     flex-direction: column;
-    text-align: center;
-    height: 100%;
+    flex: 1;
   }
 
   .hero-text {
     margin-right: 0;
-    margin-bottom: 0;
-    padding: 60px 20px 20px 20px;
-    flex: 0 0 25%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 60px 24px 40px;
+    text-align: center;
   }
 
   .hero-text h1 {
-    font-size: 2.5rem;
-    margin-bottom: 16px;
-  }
-
-  .exchange-card {
-    width: 100%;
-    max-width: none;
-    flex: 0 0 50%;
-    border-radius: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 30px 20px;
-    box-shadow: none;
-    background: white;
-    background-color: #ffffff;
-  }
-
-  .container::after {
-    content: '';
-    flex: 1;
-    background: #522FBA;
-    min-height: 25%;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-text h1 {
-    font-size: 2rem;
+    font-size: 2.25rem;
   }
 
   .hero-text p {
@@ -322,14 +263,61 @@ body {
   }
 
   .exchange-card {
-    padding: 24px;
+    width: 100%;
+    border-radius: 0;
+    padding: 32px 24px;
+    box-shadow: none;
   }
 
-  .rates {
-    gap: 20px;
+  .container::after {
+    content: '';
+    height: 25vh;
+    background: #522FBA;
   }
 
-  .rate-item .value {
-    font-size: 1.3rem;
+  .currency-info {
+    padding: 16px 14px;
+    min-width: 100px;
+  }
+
+  .amount-display {
+    padding: 16px 20px;
+  }
+
+  .currency-label {
+    font-size: 1rem;
+  }
+
+  .amount-input {
+    font-size: 1.375rem;
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-text {
+    padding: 50px 20px 30px;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .exchange-card {
+    padding: 28px 20px;
+  }
+
+  .currency-info {
+    padding: 14px 12px;
+    min-width: 90px;
+  }
+
+  .currency-label {
+    font-size: 0.9375rem;
+  }
+
+  .amount-input {
+    font-size: 1.25rem;
+    max-width: 100px;
   }
 }
