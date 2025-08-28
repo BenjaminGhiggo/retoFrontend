@@ -14,16 +14,20 @@ interface FirebasePlugin {
 
 // Type guard function - más seguro que 'as'
 function isFirebasePlugin(obj: unknown): obj is FirebasePlugin {
+  if (!obj || typeof obj !== 'object') return false;
+  
+  const candidate = obj as Record<string, unknown>;
+  
   return (
-    obj !== null &&
-    typeof obj === 'object' &&
-    'db' in obj &&
-    'collections' in obj &&
-    'documents' in obj &&
-    typeof (obj as any).collections === 'object' &&
-    typeof (obj as any).documents === 'object' &&
-    typeof (obj as any).collections?.RATES === 'string' &&
-    typeof (obj as any).documents?.EXCHANGE_RATES === 'string'
+    'db' in candidate &&
+    'collections' in candidate &&
+    'documents' in candidate &&
+    typeof candidate.collections === 'object' &&
+    candidate.collections !== null &&
+    typeof candidate.documents === 'object' &&
+    candidate.documents !== null &&
+    typeof (candidate.collections as Record<string, unknown>)?.RATES === 'string' &&
+    typeof (candidate.documents as Record<string, unknown>)?.EXCHANGE_RATES === 'string'
   );
 }
 
