@@ -144,6 +144,19 @@ const toggleConversion = () => {
   convertCurrency();
 };
 
+// Funciones para manejar clicks en tabs
+const switchToBuyRate = () => {
+  if (!isUsdToPen.value) {
+    toggleConversion();
+  }
+};
+
+const switchToSellRate = () => {
+  if (isUsdToPen.value) {
+    toggleConversion();
+  }
+};
+
 // Solo ejecutar en cliente
 if (import.meta.client) {
   onMounted(() => {
