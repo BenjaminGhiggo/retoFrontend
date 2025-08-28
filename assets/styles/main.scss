@@ -5,8 +5,14 @@
 }
 
 body {
-  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(180deg, #4A28AF 0%, #6E46E6 100%);
+  font-family:
+    'Rubik',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  background: linear-gradient(180deg, #4a28af 0%, #6e46e6 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -63,7 +69,7 @@ body {
   display: flex;
   margin-bottom: 36px;
   border-radius: 12px;
-  background: #F5F5F7;
+  background: #f5f5f7;
   padding: 4px;
 }
 
@@ -84,13 +90,13 @@ body {
 .rate-item .label {
   display: block;
   font-size: 0.875rem;
-  color: #6B7280;
+  color: #6b7280;
   margin-bottom: 4px;
   font-weight: 500;
 }
 
 .rate-item.active .label {
-  color: #6B46F2;
+  color: #6b46f2;
 }
 
 .rate-item .value {
@@ -101,7 +107,7 @@ body {
 }
 
 .rate-item.active .value {
-  color: #6B46F2;
+  color: #6b46f2;
 }
 
 .converter {
@@ -113,7 +119,7 @@ body {
 }
 
 .currency-input {
-  border: 2px solid #E5E7EB;
+  border: 2px solid #e5e7eb;
   border-radius: 16px;
   display: flex;
   transition: all 0.2s ease;
@@ -122,7 +128,7 @@ body {
 
 .currency-input:hover,
 .currency-input:focus-within {
-  border-color: #6B46F2;
+  border-color: #6b46f2;
 }
 
 .currency-info {
@@ -130,13 +136,13 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px 16px;
-  background: #F9FAFB;
+  background: #f9fafb;
   min-width: 120px;
 }
 
 .currency-label {
   font-size: 1.125rem;
-  color: #6B46F2;
+  color: #6b46f2;
   font-weight: 600;
 }
 
@@ -150,7 +156,7 @@ body {
 .receive-label {
   display: block;
   font-size: 0.75rem;
-  color: #9CA3AF;
+  color: #9ca3af;
   margin-bottom: 2px;
   font-weight: 500;
   padding-right: 25px;
@@ -165,14 +171,14 @@ body {
 .amount-symbol {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #1F2937;
+  color: #1f2937;
   margin-right: 0px;
 }
 
 .amount-input {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #1F2937;
+  color: #1f2937;
   border: none;
   outline: none;
   text-align: center;
@@ -182,16 +188,16 @@ body {
 }
 
 .amount-input:readonly {
-  color: #6B7280;
+  color: #6b7280;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
@@ -216,7 +222,7 @@ input[type="number"] {
 
 .start-operation-btn {
   width: 100%;
-  background: #6B46F2;
+  background: #6b46f2;
   color: white;
   border: none;
   padding: 18px 24px;
@@ -228,7 +234,7 @@ input[type="number"] {
 }
 
 .start-operation-btn:hover {
-  background: #5B3ACC;
+  background: #5b3acc;
   transform: translateY(-2px);
   box-shadow: 0 12px 24px rgba(107, 70, 242, 0.3);
 }
@@ -264,7 +270,7 @@ input[type="number"] {
 }
 
 .modal-header h2 {
-  color: #6B46F2;
+  color: #6b46f2;
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0;
@@ -275,7 +281,7 @@ input[type="number"] {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #6B7280;
+  color: #6b7280;
   padding: 0;
   width: 30px;
   height: 30px;
@@ -297,17 +303,17 @@ input[type="number"] {
   justify-content: space-between;
   margin-bottom: 12px;
   padding: 12px;
-  background: #F9FAFB;
+  background: #f9fafb;
   border-radius: 8px;
 }
 
 .summary-item .label {
-  color: #6B7280;
+  color: #6b7280;
   font-weight: 500;
 }
 
 .summary-item .amount {
-  color: #1F2937;
+  color: #1f2937;
   font-weight: 600;
   font-size: 1.1rem;
 }
@@ -316,7 +322,7 @@ input[type="number"] {
   display: flex;
   justify-content: space-between;
   padding: 12px;
-  background: #6B46F2;
+  background: #6b46f2;
   color: white;
   border-radius: 8px;
   margin-top: 16px;
@@ -358,7 +364,7 @@ input[type="number"] {
 
 @media (max-width: 768px) {
   body {
-    background: #522FBA;
+    background: #522fba;
     padding: 0;
     align-items: stretch;
     min-height: 100vh;
@@ -372,7 +378,7 @@ input[type="number"] {
     flex: 1;
     padding: 0;
     justify-content: space-between;
-    background: #522FBA;
+    background: #522fba;
     min-height: 100vh;
   }
 
@@ -381,7 +387,7 @@ input[type="number"] {
     flex: 1;
     justify-content: center;
     display: flex;
-    background: #522FBA;
+    background: #522fba;
   }
 
   .hero-text {
@@ -389,7 +395,7 @@ input[type="number"] {
     padding: 60px 24px 40px;
     text-align: center;
     flex: 0 0 auto;
-    background: #522FBA;
+    background: #522fba;
   }
 
   .hero-text h1 {
@@ -404,7 +410,7 @@ input[type="number"] {
   .receive-label {
     display: block;
     font-size: 0.75rem;
-    color: #9CA3AF;
+    color: #9ca3af;
     margin-bottom: 2px;
     font-weight: 500;
     padding-right: 35.5px;
@@ -426,7 +432,7 @@ input[type="number"] {
     content: '';
     display: block;
     height: 25vh;
-    background: #522FBA;
+    background: #522fba;
     flex-shrink: 0;
   }
 
@@ -462,7 +468,7 @@ input[type="number"] {
   .receive-label {
     display: block;
     font-size: 0.75rem;
-    color: #9CA3AF;
+    color: #9ca3af;
     margin-bottom: 2px;
     font-weight: 500;
     padding-right: 27px;

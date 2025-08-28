@@ -18,9 +18,9 @@ export const useExchangeRateStore = defineStore('exchangeRate', () => {
     console.log('🔍 getRepository called:', {
       hasRepository: !!repository,
       isClient: import.meta.client,
-      environment: import.meta.env?.SSR ? 'server' : 'client'
+      environment: import.meta.env?.SSR ? 'server' : 'client',
     });
-    
+
     if (!repository && import.meta.client) {
       console.log('📝 Creating new FirebaseExchangeRateRepository...');
       try {

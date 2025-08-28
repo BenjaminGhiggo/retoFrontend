@@ -2,13 +2,13 @@
   <div class="container">
     <div class="content">
       <div class="hero-text">
-        <h1>El mejor<br >tipo de cambio</h1>
-        <p>para cambiar dólares y soles<br >online en Perú</p>
+        <h1>El mejor<br />tipo de cambio</h1>
+        <p>para cambiar dólares y soles<br />online en Perú</p>
       </div>
 
       <div class="exchange-card">
         <div class="rates">
-          <div 
+          <div
             class="rate-item"
             :class="{ active: isUsdToPen }"
             @click="switchToBuyRate"
@@ -16,7 +16,7 @@
             <span class="label">Dólar compra</span>
             <span class="value">{{ (purchasePrice || 3.924).toFixed(4) }}</span>
           </div>
-          <div 
+          <div
             class="rate-item"
             :class="{ active: !isUsdToPen }"
             @click="switchToSellRate"
@@ -28,29 +28,28 @@
 
         <div class="converter">
           <div class="input-group">
-
             <div class="currency-input">
               <div class="currency-info">
                 <span class="currency-label">Dólares</span>
               </div>
               <div class="amount-display">
-                <span class="send-label">{{ isUsdToPen ? 'Envías' : 'Recibes' }}</span>
+                <span class="send-label">{{
+                  isUsdToPen ? 'Envías' : 'Recibes'
+                }}</span>
                 <div class="amount-wrapper">
                   <span class="amount-symbol">$</span>
-                  <input 
-                    v-model.number="usdAmount" 
-                    type="number" 
+                  <input
+                    v-model.number="usdAmount"
+                    type="number"
                     class="amount-input"
                     :readonly="!isUsdToPen"
                     step="0.01"
                     min="0"
                     @input="onUsdInput"
-                  >
+                  />
                 </div>
               </div>
             </div>
-
-
           </div>
 
           <div class="converter-button">
@@ -59,7 +58,7 @@
               alt="Convertir"
               class="converter-icon"
               @click="toggleConversion"
-            >
+            />
           </div>
 
           <div class="input-group">
@@ -68,25 +67,29 @@
                 <span class="currency-label">Soles</span>
               </div>
               <div class="amount-display">
-                <span class="receive-label">{{ isUsdToPen ? 'Recibes' : 'Envías' }}</span>
+                <span class="receive-label">{{
+                  isUsdToPen ? 'Recibes' : 'Envías'
+                }}</span>
                 <div class="amount-wrapper">
                   <span class="amount-symbol">S/</span>
-                  <input 
-                    v-model.number="penAmount" 
-                    type="number" 
+                  <input
+                    v-model.number="penAmount"
+                    type="number"
                     class="amount-input"
                     :readonly="isUsdToPen"
                     step="0.01"
                     min="0"
                     @input="onPenInput"
-                  >
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <button class="start-operation-btn" @click="showConfirmation">Iniciar operación</button>
+        <button class="start-operation-btn" @click="showConfirmation">
+          Iniciar operación
+        </button>
       </div>
     </div>
   </div>
@@ -110,7 +113,9 @@
           </div>
           <div class="rate-applied">
             <span class="rate-label">Tasa aplicada:</span>
-            <span class="rate-value">{{ isUsdToPen ? purchasePrice.toFixed(4) : salePrice.toFixed(4) }}</span>
+            <span class="rate-value">{{
+              isUsdToPen ? purchasePrice.toFixed(4) : salePrice.toFixed(4)
+            }}</span>
           </div>
         </div>
         <div class="confirmation-message">
@@ -151,10 +156,12 @@ const convertCurrency = async () => {
   try {
     if (isUsdToPen.value) {
       // Convertir USD → PEN usando purchase_price
-      penAmount.value = Math.round(usdAmount.value * purchasePrice.value * 100) / 100;
+      penAmount.value =
+        Math.round(usdAmount.value * purchasePrice.value * 100) / 100;
     } else {
-      // Convertir PEN → USD usando sale_price  
-      usdAmount.value = Math.round(penAmount.value / salePrice.value * 100) / 100;
+      // Convertir PEN → USD usando sale_price
+      usdAmount.value =
+        Math.round((penAmount.value / salePrice.value) * 100) / 100;
     }
   } catch (error) {
     console.error('Error en conversión:', error);

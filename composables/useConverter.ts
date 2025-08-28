@@ -23,7 +23,7 @@ export const useConverter = () => {
         convertedAmount: penAmount / 3.945, // sale_price por defecto
         rate: 3.945,
         fromCurrency: 'PEN' as const,
-        toCurrency: 'USD' as const
+        toCurrency: 'USD' as const,
       };
     }
     return await converter.convertPenToUsd(penAmount);
@@ -38,7 +38,7 @@ export const useConverter = () => {
         convertedAmount: usdAmount * 3.924, // purchase_price por defecto
         rate: 3.924,
         fromCurrency: 'USD' as const,
-        toCurrency: 'PEN' as const
+        toCurrency: 'PEN' as const,
       };
     }
     return await converter.convertUsdToPen(usdAmount);

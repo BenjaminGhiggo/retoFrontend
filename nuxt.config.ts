@@ -8,14 +8,12 @@ export default defineNuxtConfig({
   // Configurar Google Fonts
   fonts: {
     families: [
-      { name: 'Rubik', provider: 'google', weights: [400, 500, 600, 700] }
-    ]
+      { name: 'Rubik', provider: 'google', weights: [400, 500, 600, 700] },
+    ],
   },
 
   //configuramos plugins
-  plugins: [
-    '../plugins/firebase.client.ts'
-  ],
+  plugins: ['../plugins/firebase.client.ts'],
 
   //configuramos Typescript estricto
   typescript: {
@@ -27,7 +25,7 @@ export default defineNuxtConfig({
 
   // Configuración para generación estática
   nitro: {
-    preset: 'netlify'
+    preset: 'netlify',
   },
 
   // Configuramos Sass
