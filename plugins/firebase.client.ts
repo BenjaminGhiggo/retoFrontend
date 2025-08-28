@@ -3,7 +3,6 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
 export default defineNuxtPlugin((nuxtApp) => {
-
   const firebaseConfig = {
     apiKey: 'AIzaSyAvoWBm4sf53VyqFUuFvzerV6uC4XgYtD0',
     authDomain: 'cotizadorreto.firebaseapp.com',
