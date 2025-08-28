@@ -155,8 +155,9 @@ body {
 }
 
 .amount-wrapper {
-  display: inline;
-  text-align: right;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: flex-end;
 }
 
 .amount-symbol {
