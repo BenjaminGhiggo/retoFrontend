@@ -9,6 +9,9 @@
     "preview": "nuxt preview",
     "lint": "eslint .",
     "format": "prettier --write .",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
@@ -27,7 +30,11 @@
   },
   "devDependencies": {
     "@types/node": "^24.3.0",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^26.1.0",
     "prettier": "^3.6.2",
-    "sass": "^1.91.0"
+    "sass": "^1.91.0",
+    "vitest": "^3.2.4"
   }
 }
