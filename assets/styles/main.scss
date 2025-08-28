@@ -54,7 +54,8 @@ body {
   border-radius: 20px;
   padding: 36px 40px 40px;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-  width: 480px;
+  width: 593px;
+  height: 500px;
   flex-shrink: 0;
 }
 
@@ -338,6 +339,21 @@ input[type="number"] {
   color: #374151;
   font-size: 1rem;
   font-weight: 500;
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .hero-text {
+    margin-right: 40px;
+  }
+
+  .hero-text h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+  }
+
+  .hero-text p {
+    font-size: 1.1rem;
+  }
 }
 
 @media (max-width: 768px) {
