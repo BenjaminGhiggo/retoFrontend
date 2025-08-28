@@ -86,7 +86,36 @@
           </div>
         </div>
 
-        <button class="start-operation-btn">Iniciar operación</button>
+        <button class="start-operation-btn" @click="showConfirmation">Iniciar operación</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de confirmación -->
+  <div v-if="showModal" class="modal-overlay" @click="closeModal">
+    <div class="modal-content" @click.stop>
+      <div class="modal-header">
+        <h2>¡Perfecto!</h2>
+        <button class="close-btn" @click="closeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="conversion-summary">
+          <div class="summary-item">
+            <span class="label">{{ isUsdToPen ? 'Envías:' : 'Recibes:' }}</span>
+            <span class="amount">${{ usdAmount.toFixed(2) }}</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">{{ isUsdToPen ? 'Recibes:' : 'Envías:' }}</span>
+            <span class="amount">S/ {{ penAmount.toFixed(2) }}</span>
+          </div>
+          <div class="rate-applied">
+            <span class="rate-label">Tasa aplicada:</span>
+            <span class="rate-value">{{ isUsdToPen ? purchasePrice.toFixed(4) : salePrice.toFixed(4) }}</span>
+          </div>
+        </div>
+        <div class="confirmation-message">
+          <p>Te contactaremos para completar tu operación</p>
+        </div>
       </div>
     </div>
   </div>
@@ -113,6 +142,9 @@ const salePrice = computed(() => {
 const usdAmount = ref(1000);
 const penAmount = ref(3924);
 const isUsdToPen = ref(true); // true = USD → PEN, false = PEN → USD
+
+// Estado del modal
+const showModal = ref(false);
 
 // Conversión automática usando tasas directamente (sin composable)
 const convertCurrency = async () => {
@@ -161,6 +193,15 @@ const switchToSellRate = () => {
   if (isUsdToPen.value) {
     toggleConversion();
   }
+};
+
+// Funciones del modal
+const showConfirmation = () => {
+  showModal.value = true;
+};
+
+const closeModal = () => {
+  showModal.value = false;
 };
 
 // Solo ejecutar en cliente

@@ -232,6 +232,114 @@ input[type="number"] {
   box-shadow: 0 12px 24px rgba(107, 70, 242, 0.3);
 }
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  color: #6B46F2;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #6B7280;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  color: #374151;
+}
+
+.conversion-summary {
+  margin-bottom: 20px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 12px;
+  background: #F9FAFB;
+  border-radius: 8px;
+}
+
+.summary-item .label {
+  color: #6B7280;
+  font-weight: 500;
+}
+
+.summary-item .amount {
+  color: #1F2937;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.rate-applied {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background: #6B46F2;
+  color: white;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.rate-label {
+  font-weight: 500;
+}
+
+.rate-value {
+  font-weight: 700;
+}
+
+.confirmation-message {
+  text-align: center;
+  padding: 16px;
+}
+
+.confirmation-message p {
+  color: #374151;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
 @media (max-width: 768px) {
   body {
     background: #522FBA;
