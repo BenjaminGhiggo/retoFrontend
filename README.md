@@ -1,75 +1,111 @@
-# Nuxt Minimal Starter
+# Exchange Rate Converter
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Aplicación de conversión de divisas USD/PEN con arquitectura hexagonal en Nuxt3.
 
-## Setup
-
-Make sure to install dependencies:
+## Instalación
 
 ```bash
-# npm
+git clone git@github.com:BenjaminGhiggo/retoFrontend.git
+cd retoFrontend
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+## Desarrollo
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
-
-Build the application for production:
+## Construcción
 
 ```bash
-# npm
+npm run build
+npm run preview
+```
+
+## Testing
+
+```bash
+# Ejecutar todos los tests
+npm run test
+
+# Ejecutar tests sin watcher (modo CI)
+npm run test -- --run
+
+# Ejecutar tests específicos
+npm run test tests/stores/exchangeRate.test.ts
+npm run test tests/application/usecases/ConvertCurrency.test.ts
+
+# Ejecutar tests con cobertura
+npm run test -- --coverage
+
+# Ejecutar tests en modo watch
+npm run test -- --watch
+```
+
+## Linting y Formato
+
+```bash
+npm run lint
+npx prettier --write .
+npx vue-tsc --noEmit
+```
+
+## Firebase CLI (opcional)
+
+```bash
+npm install -g firebase-tools
+firebase login
+firebase init hosting
+firebase deploy
+```
+
+## Git Workflow
+
+```bash
+git status
+git add .
+git commit -m "mensaje"
+git push origin main
+```
+
+## Verificación del Proyecto
+
+```bash
+# Verificar tipos TypeScript
+npx vue-tsc --noEmit
+
+# Verificar build
 npm run build
 
-# pnpm
-pnpm build
+# Verificar que todos los tests pasan
+npm run test -- --run
 
-# yarn
-yarn build
-
-# bun
-bun run build
+# Verificar linting
+npm run lint
 ```
 
-Locally preview production build:
+## Arquitectura
 
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+```
+src/
+├── domain/entities/ExchangeRate.ts
+├── domain/ports/IExchangeRateRepository.ts
+├── application/usecases/ConvertCurrency.ts
+└── infrastructure/adapters/FirebaseExchangeRateRepository.ts
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Firebase Configuración
+
+- Colección: rates
+- Documento: awaOMswZ8JGxjmHCpVZ4
+- Campos: purchase_price, sale_price
+
+## Fórmulas
+
+- USD a PEN: Monto USD × purchase_price
+- PEN a USD: Monto PEN ÷ sale_price
+
+## Deploy
+
+Netlify con preset estático configurado en nuxt.config.ts
