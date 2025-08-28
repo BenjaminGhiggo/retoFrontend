@@ -25,6 +25,11 @@ export default defineNuxtConfig({
   },
   css: ['../assets/styles/main.scss'],
 
+  // Configuración para generación estática
+  nitro: {
+    preset: 'netlify'
+  },
+
   // Configuramos Sass
   vite: {
     css: {
